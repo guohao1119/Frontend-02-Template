@@ -16,3 +16,6 @@
 3 掌握了一些好的学习方法，归纳总结，追溯法等等，要在后续的学习过程中不断实践
 ```
 
+
+http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf
+
