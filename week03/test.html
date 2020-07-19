@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tutorial Demo</title>
+  </head>
+  <body>
+    <div id="mountNode"></div>
+    <script src="https://gw.alipayobjects.com/os/antv/pkg/_antv.g6-3.1.0/build/g6.js"></script>
+    <script>
+      const graph = new G6.TreeGraph({
+        container: 'mountNode',
+        width: window.innerWidth,
+        height: window.innerHeight,
+        defaultNode: {
+          size: 35
+        },
+        layout: {
+          // type: 'radial',
+          // center: [600, 600],
+          // preventOverlap: true,
+          // nodeSize: 50,
+          // nodeSpacing: 30
+          // radius: 300
+          // preventOverlap: true,
+          // linkDistance: 300
+          type: 'mindmap',
+          // direction: 'H',
+          getSubTreeSep: () => 20,
+          getVGap: () => 10,
+          getHeight: () => 30,
+          getWidth: () => 30,
+          getSide: () => 'right'
+        }
+      });
+
+
+      var set = new Set();
+      var objects = [
+          eval,
+          isFinite,
+          isNaN,
+          parseFloat,
+          parseInt,
+          decodeURI,
+          decodeURIComponent,
+          encodeURI,
+          encodeURIComponent,
+          Array,
+          Date,
+          RegExp,
+          Promise,
+          Proxy,
+          Map,
+          WeakMap,
+          Set,
+          WeakSet,
+          Function,
+          Boolean,
+          String,
+          Number,
+          Symbol,
+          Object,
+          Error,
+          EvalError,
+          RangeError,
+          ReferenceError,
+          SyntaxError,
+          TypeError,
+          URIError,
+          ArrayBuffer,
+          SharedArrayBuffer,
+          DataView,
+          Float32Array,
+          Float64Array,
+          Int8Array,
+          Int16Array,
+          Int32Array,
+          Uint8Array,
+          Uint16Array,
+          Uint32Array,
+          Uint8ClampedArray,
+          Atomics,
+          JSON,
+          Math,
+          Reflect];
+      objects.forEach(o => set.add(o));
+
+      // 所有节点
+      const renderData = {
+        id: 'root',
+        label: 'realm',
+        x: 300,
+        y: 300,
+        children: []
+      }
+
+      
+      objects.forEach((item, index) => {
+        renderData.children.push({
+          id: 'substree' + index,
+          label: item.name || item
+        })
+      })
+      console.log(renderData)
+
+      // for(var i = 0; i < objects.length; i++) {
+      //     var o = objects[i]
+      //     for(var p of Object.getOwnPropertyNames(o)) {
+      //         var d = Object.getOwnPropertyDescriptor(o, p)
+      //         if( (d.value !== null && typeof d.value === "object") || (typeof d.value === "function"))
+      //             if(!set.has(d.value))
+      //                 set.add(d.value), objects.push(d.value);
+      //         if( d.get )
+      //             if(!set.has(d.get))
+      //                 set.add(d.get), objects.push(d.get);
+      //         if( d.set )
+      //             if(!set.has(d.set))
+      //                 set.add(d.set), objects.push(d.set);
+      //     }
+      // }
+
+      graph.data(renderData);
+      graph.render();
+    </script>
+  </body>
+</html>
