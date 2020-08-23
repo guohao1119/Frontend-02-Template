@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  &lambda;
+
+    &nbsp;
+
+    &quot;
+
+    &amp;
+
+    &lt;
+
+    &gt;
+  <script>
+    let names = Object.getOwnPropertyNames(window)
+    console.log(names.length)
+    
+    // 过滤掉node
+    names = names.filter( e => {
+      try {
+        return !(window[e].prototype instanceof Node)
+      } catch (error) {
+        return true
+      }
+    }).filter(e => e != 'Node')
+
+    // 过滤掉事件
+    names = names.filter(e => !e.match(/^on/))
+
+    // 过滤掉webkit私有对象
+    names = names.filter(e => !e.match(/^webkit/i))
+    
+    // ecma 402
+    names = names.filter(e => e != 'Intl')
+
+    // 过滤webgl
+    names = names.filter(e => !e.match(/^WebGL/))
+
+    // 过滤webaudio
+    names = names.filter(e => !e.match(/^Audio/) && e != 'WaveShaperNode')
+
+    // dom-textencoder
+    names = names.filter(e => !e.match(/^Text/))
+
+    console.log(names.length)
+    console.log(names)
+  </script>
+</body>
+</html>
